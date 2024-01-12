@@ -1,22 +1,15 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const cors = require('cors');
-
+const limiter = require('./middlewares/rateLimit');
 const { PORT, MONGO_URL } = require('./config');
-
-const app = express();
-
 const routes = require('./routes/index');
 const handleError = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 1500,
-});
+const app = express();
 
 mongoose.connect(MONGO_URL);
 app.use(cors({

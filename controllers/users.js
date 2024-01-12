@@ -27,7 +27,6 @@ module.exports.login = (req, res, next) => {
           const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
           return res.send({ token });
         })
-        .then(() => res.send({ message: 'Успешный вход' }))
         .catch(next);
     })
     .catch(next);
@@ -101,6 +100,8 @@ module.exports.updateUsersInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Получение пользователя с некорректным id'));
+      } else if (err.code === 11000) {
+        next(new ConflictError('Такой пользователь уже существует'));
       } else {
         next(err);
       }

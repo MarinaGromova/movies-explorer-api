@@ -3,4 +3,4 @@
 ДИПЛОМНАЯ РАБОТА В ЯНДЕКС ПРАКТИКУМЕ.
 БЭКЕНД
 
-#Демо Сервер доступен по адресу: https://movie.shtrihh.nomoredomainsmonster.ru
+#Демо Сервер доступен по адресу: api.movie.shtrihh.nomoredomainsmonster.ru
